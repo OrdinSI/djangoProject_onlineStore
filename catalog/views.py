@@ -4,10 +4,12 @@ from django.shortcuts import render
 # Create your views here.
 
 def home(request):
+    """ Renders the home page"""
     return render(request, 'catalog/home.html')
 
 
 def contacts(request):
+    """ Renders the contacts page """
     if request.method == 'POST':
         name = request.POST.get('name')
         phone = request.POST.get('phone')
