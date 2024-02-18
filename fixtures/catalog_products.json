@@ -3,78 +3,78 @@
   "model": "catalog.product",
   "pk": 1,
   "fields": {
-    "name": "Смартфон",
-    "description": "бла бла",
+    "name": "РЎРјР°СЂС‚С„РѕРЅ",
+    "description": "Р±Р»Р° Р±Р»Р°",
     "image_preview": "products/ordin_task_20.1_image1.png",
     "category": 1,
     "price": "100.67",
-    "created_at": "2024-02-17T11:02:43.382Z",
-    "updated_at": "2024-02-17T11:02:43.382Z"
+    "created_at": "2024-02-17T12:51:32.668Z",
+    "updated_at": "2024-02-17T12:51:32.668Z"
   }
 },
 {
   "model": "catalog.product",
   "pk": 2,
   "fields": {
-    "name": "Ноутбук",
-    "description": "бла",
+    "name": "РќРѕСѓС‚Р±СѓРє",
+    "description": "Р±Р»Р°",
     "image_preview": "",
     "category": 1,
     "price": "34.00",
-    "created_at": "2024-02-17T11:03:18.845Z",
-    "updated_at": "2024-02-17T11:03:18.845Z"
+    "created_at": "2024-02-17T12:51:32.668Z",
+    "updated_at": "2024-02-17T12:51:32.668Z"
   }
 },
 {
   "model": "catalog.product",
   "pk": 3,
   "fields": {
-    "name": "Офисный стул",
-    "description": "мда уж",
+    "name": "РћС„РёСЃРЅС‹Р№ СЃС‚СѓР»",
+    "description": "РјРґР° СѓР¶",
     "image_preview": "",
     "category": 2,
     "price": "567.00",
-    "created_at": "2024-02-17T11:03:57.599Z",
-    "updated_at": "2024-02-17T11:03:57.599Z"
+    "created_at": "2024-02-17T12:51:32.668Z",
+    "updated_at": "2024-02-17T12:51:32.668Z"
   }
 },
 {
   "model": "catalog.product",
   "pk": 4,
   "fields": {
-    "name": "Набор садового инструмента",
-    "description": "Отличный набор",
+    "name": "РќР°Р±РѕСЂ СЃР°РґРѕРІРѕРіРѕ РёРЅСЃС‚СЂСѓРјРµРЅС‚Р°",
+    "description": "РћС‚Р»РёС‡РЅС‹Р№ РЅР°Р±РѕСЂ",
     "image_preview": "",
     "category": 2,
     "price": "32423.00",
-    "created_at": "2024-02-17T11:04:28.644Z",
-    "updated_at": "2024-02-17T11:04:28.644Z"
+    "created_at": "2024-02-17T12:51:32.668Z",
+    "updated_at": "2024-02-17T12:51:32.668Z"
   }
 },
 {
   "model": "catalog.product",
   "pk": 5,
   "fields": {
-    "name": "Кроссовки",
-    "description": "Бег",
+    "name": "РљСЂРѕСЃСЃРѕРІРєРё",
+    "description": "Р‘РµРі",
     "image_preview": "",
     "category": 3,
     "price": "234234.00",
-    "created_at": "2024-02-17T11:04:48.270Z",
-    "updated_at": "2024-02-17T11:04:48.270Z"
+    "created_at": "2024-02-17T12:51:32.668Z",
+    "updated_at": "2024-02-17T12:51:32.668Z"
   }
 },
 {
   "model": "catalog.product",
   "pk": 6,
   "fields": {
-    "name": "Гантели",
-    "description": "Огонь",
+    "name": "Р“Р°РЅС‚РµР»Рё",
+    "description": "РћРіРѕРЅСЊ",
     "image_preview": "",
     "category": 3,
     "price": "435435.00",
-    "created_at": "2024-02-17T11:05:07.045Z",
-    "updated_at": "2024-02-17T11:05:07.045Z"
+    "created_at": "2024-02-17T12:51:32.668Z",
+    "updated_at": "2024-02-17T12:51:32.668Z"
   }
 }
 ]

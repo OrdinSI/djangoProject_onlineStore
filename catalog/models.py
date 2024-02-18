@@ -29,8 +29,7 @@ class Product(models.Model):
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Date modified")
 
     def __str__(self):
-        return (f"{self.name}, {self.description}, "
-                f"{self.price}, {self.created_at}, {self.updated_at}, {self.category}")
+        return (f"{self.name}, {self.description}, {self.price}, {self.category}")
 
     class Meta:
         verbose_name = "Product"
