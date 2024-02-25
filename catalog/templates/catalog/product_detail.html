@@ -1,0 +1,28 @@
+{% extends 'catalog/base.html' %}
+{% load image_tags %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="card mb-3">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="{% image_tag object.image_preview %}" class="img-fluid rounded-start" alt="{{ object.name }}">
+            </div>
+            <div class="col-md-8">
+                <div class="d-flex flex-column h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ object.name }}</h5>
+                        <p class="card-text">Категория: {{ object.category.name }}</p>
+                        <p class="card-text">{{ object.description }}</p>
+                        <p class="card-text">{{ object.price }} &#8381;</p>
+                        <p class="card-text"><small class="text-muted">Последнее обновление: {{ object.updated_at }}</small></p>
+                    </div>
+                    <div class="mt-auto d-flex justify-content-end mb-3 m-lg-3">
+                        <button type="button" class="btn btn-primary btn-lg">Купить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
