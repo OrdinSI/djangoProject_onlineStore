@@ -10,7 +10,7 @@ class Blog(models.Model):
     content = models.TextField(verbose_name='Content')
     preview_image = models.ImageField(upload_to="blog/", verbose_name='Preview_image', **NULLABLE)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Created')
-    published = models.BooleanField(default=False, verbose_name='Published')
+    published = models.BooleanField(default=True, verbose_name='Published')
     views_count = models.IntegerField(default=0, verbose_name='Views')
 
     def __str__(self):
