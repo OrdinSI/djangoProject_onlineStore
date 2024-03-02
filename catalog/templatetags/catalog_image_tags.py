@@ -4,7 +4,7 @@ register = template.Library()
 
 
 @register.simple_tag()
-def image_tag(data):
+def catalog_image_tags(data):
     if data:
         return f'/media/{data}'
     return '#'

@@ -1,39 +1,29 @@
-from django.shortcuts import render
-
+from django.views.generic import ListView, DetailView, TemplateView
 from catalog.models import Product
 
 
-# Create your views here.
-
-def home(request):
-    """ Renders the home page"""
-
-    context = {
-        'object_list': Product.objects.all(),
-        'title': 'Главная'
-    }
-    return render(request, 'catalog/home.html', context)
+class ProductListView(ListView):
+    model = Product
 
 
-def contacts(request):
-    """ Renders the contacts page """
-    if request.method == 'POST':
+class ProductDetailView(DetailView):
+    model = Product
+
+
+class ContactsView(TemplateView):
+    template_name = 'catalog/contacts.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = "Контакты"
+        return context
+
+    def post(self, request, *args, **kwargs):
         name = request.POST.get('name')
         phone = request.POST.get('phone')
         message = request.POST.get('message')
         print(f"Name: {name}, Phone: {phone}, Message: {message}")
-
-    context = {
-        'title': "Контакты"
-    }
-    return render(request, 'catalog/contacts.html', context)
+        return super().get(request, *args, **kwargs)
 
 
-def product_detail(request, pk):
-    """ Renders the product page """
-    context = {
-        'object': Product.objects.get(pk=pk)
-
-    }
-    return render(request, 'catalog/product_detail.html', context)
 

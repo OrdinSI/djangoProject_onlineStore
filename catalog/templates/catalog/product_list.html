@@ -1,5 +1,5 @@
 {% extends 'catalog/base.html' %}
-{% load image_tags %}
+{% load catalog_image_tags %}
 
 
 {% block content %}
@@ -8,12 +8,12 @@
             {% for object in object_list %}
                 <div class="col">
                     <div class="card h-100">
-                        <img src="{% image_tag object.image_preview %}" class="card-img-top img-fluid" alt="{{ object.name }}">
+                        <img src="{% catalog_image_tags object.image_preview %}" class="card-img-top img-fluid" alt="{{ object.name }}">
                         <div class="card-body">
                             <h5 class="card-title">{{ object.name }}</h5>
                             <p class="card-text" >{{ object.price }} &#8381;</p>
                             <p class="card-text">{{ object.description | truncatechars:100 }}</p>
-                            <a href="{% url 'catalog:product_detail' object.id %}" class="stretched-link"></a>
+                            <a href="{% url 'catalog:product_detail' object.pk %}" class="stretched-link"></a>
                         </div>
                     </div>
                 </div>
