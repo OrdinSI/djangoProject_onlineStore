@@ -1,4 +1,5 @@
 from django.views.generic import ListView, DetailView, TemplateView
+
 from catalog.models import Product
 
 
@@ -24,6 +25,3 @@ class ContactsView(TemplateView):
         message = request.POST.get('message')
         print(f"Name: {name}, Phone: {phone}, Message: {message}")
         return super().get(request, *args, **kwargs)
-
-
-

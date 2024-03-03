@@ -14,4 +14,3 @@ urlpatterns = [
     path("blog_update/<int:pk>/", BlogUpdateView.as_view(), name='blog_update'),
     path("publish/<int:pk>/", publish, name='publish'),
 ]
-
