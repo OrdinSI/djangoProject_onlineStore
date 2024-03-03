@@ -8,4 +8,3 @@ def catalog_image_tags(data):
     if data:
         return f'/media/{data}'
     return '#'
-
