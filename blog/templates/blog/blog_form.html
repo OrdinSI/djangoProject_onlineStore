@@ -1,44 +1,28 @@
 {% extends 'catalog/base.html' %}
-{% load catalog_image_tags %}
 
 {% block content %}
 
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="card mb-3">
-            <div class="card-header">Добавить пост</div>
-
-            <div class="card-body">
-
-                <div class="mb-3">
-                    <label class="form-label">Заголовок</label>
-                    <input type="text" class="form-control" name="title" value="{{ object.title }}">
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Текст поста</label>
-                    <textarea class="form-control" rows="5" name="content"> {{ object.content }} </textarea>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Изображение</label>
-                    {% if object %}
-                        <div>
-                            Текущее изображение:
-                            <img src="{% catalog_image_tags object.preview_image %}" class="img-fluid">
-                        </div>
-                    {% endif %}
-                    <input type="file" class="form-control" name="preview_image">
-                </div>
-                <button type=" submit" class="btn btn-primary">
-                    {% if object %}
-                        Сохранить пост
+            <div class="card-header">
+                {% if object %}
+                        Изменить пост
                     {% else %}
-                        Создать пост
+                        Добавить пост
+                {% endif %}
+            </div>
+            <div class="card-body">
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-success">
+                    {% if object %}
+                        Сохранить
+                    {% else %}
+                        Создать
                     {% endif %}
                 </button>
             </div>
+            <div class="card-footer"></div>
         </div>
     </form>
-
 {% endblock %}

@@ -4,8 +4,12 @@
 
 {% block content %}
     <div class="container">
+    <div class="mb-3">
+        <a class="btn btn-primary" href="{% url "catalog:product_create" %}" role="button">Добавить продукт</a>
+    </div>
         <div class="row row-cols-1 row-cols-md-4 g-4 justify-content-center">
             {% for object in object_list %}
+                {% if object.active_version %}
                 <div class="col">
                     <div class="card h-100">
                         <img src="{% catalog_image_tags object.image_preview %}" class="card-img-top img-fluid" alt="{{ object.name }}">
@@ -17,6 +21,7 @@
                         </div>
                     </div>
                 </div>
+                {% endif %}
             {% endfor %}
         </div>
     </div>

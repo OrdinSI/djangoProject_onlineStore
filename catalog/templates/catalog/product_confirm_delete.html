@@ -1,17 +1,16 @@
 {% extends 'catalog/base.html' %}
 
-
 {% block content %}
 
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="card mb-3">
-            <div class="card-header">Удалить пост</div>
+            <div class="card-header">Удалить продукт</div>
             <div class="card-body">
-                <label class="form-label">Хотите удалить данный пост?  {{ object.title }}</label>
+                <label class="form-label">Хотите удалить данный продукт?  {{ object.title }}</label>
                 <div class="mb-3">
                     <button type="submit" class="btn btn-danger">Подтвердить</button>
-                    <a href="{% url 'blog:blog_list' %}" class="btn btn-warning">Отмена</a>
+                    <a href="{% url 'catalog:product_list' %}" class="btn btn-warning">Отмена</a>
                 </div>
             </div>
         </div>
