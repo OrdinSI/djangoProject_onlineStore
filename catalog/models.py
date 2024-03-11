@@ -7,30 +7,30 @@ NULLABLE = {"blank": True, "null": True}
 
 class Category(models.Model):
     """Category Model"""
-    name = models.CharField(max_length=255, verbose_name="Name")
-    description = models.TextField(verbose_name="Description")
+    name = models.CharField(max_length=255, verbose_name="имя")
+    description = models.TextField(verbose_name="описание")
 
     def __str__(self):
-        return f"{self.name}, {self.description}"
+        return f"{self.name}"
 
     class Meta:
-        verbose_name = "Category"
-        verbose_name_plural = "Categories"
+        verbose_name = "категория"
+        verbose_name_plural = "категории"
 
 
 class Product(models.Model):
     """Product Model"""
-    name = models.CharField(max_length=255, verbose_name="Name")
-    description = models.TextField(verbose_name="Description")
-    image_preview = models.ImageField(upload_to="products/", verbose_name="Preview image", **NULLABLE)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name="Category")
-    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Price")
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Date added")
-    updated_at = models.DateTimeField(auto_now=True, verbose_name="Date modified")
+    name = models.CharField(max_length=255, verbose_name="название")
+    description = models.TextField(verbose_name="описание")
+    image_preview = models.ImageField(upload_to="products/", verbose_name="изображение", **NULLABLE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name="категория")
+    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="цена")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="дата создания")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="дата изменения")
 
     def __str__(self):
         return (f"{self.name}, {self.description}, {self.price}, {self.category}")
 
     class Meta:
-        verbose_name = "Product"
-        verbose_name_plural = "Products"
+        verbose_name = "продукт"
+        verbose_name_plural = "продукты"

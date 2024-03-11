@@ -1,5 +1,5 @@
 {% extends 'catalog/base.html' %}
-{% load catalog_image_tags %}
+{% load blog_image_tags %}
 
 {% block content %}
 
@@ -29,7 +29,7 @@
 
                         <div class="col-auto d-none d-lg-block card-img-container">
                             {% if object.preview_image %}
-                                <img class="img-fluid" src="{% catalog_image_tags object.preview_image %}"
+                                <img class="img-fluid" src="{% blog_image_tags object.preview_image %}"
                                      alt="{{ object.title }}" width="200" height="250">
                             {% else %}
                                 <svg class="bd-placeholder-img" width="200" height="250"

@@ -134,3 +134,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
+
+# Список запрещенных слов
+FORBIDDEN_WORDS = [
+    'казино', 'криптовалюта', 'крипта', 'биржа', 'дешево',
+    'бесплатно', 'обман', 'полиция', 'радар'
+]

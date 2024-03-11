@@ -1,11 +1,12 @@
 {% extends 'catalog/base.html' %}
+{% load catalog_image_tags %}
 
 {% block content %}
 
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="card mb-3">
-            <div class="card-header">Добавить пост</div>
+            <div class="card-header">Добавить продукт</div>
             <div class="card-body">
                 {{ form.as_p }}
                 <button type="submit" class="btn btn-success">Сохранить</button>
