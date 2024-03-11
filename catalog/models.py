@@ -1,3 +1,4 @@
+from django.core.validators import MinValueValidator
 from django.db import models
 
 # Create your models here.
@@ -34,3 +35,19 @@ class Product(models.Model):
     class Meta:
         verbose_name = "продукт"
         verbose_name_plural = "продукты"
+
+
+class Version(models.Model):
+    """Version Model"""
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='versions', verbose_name="продукт")
+    number = models.IntegerField(default=0, validators=[MinValueValidator(0)], verbose_name="номер")
+    name = models.CharField(max_length=255, verbose_name="название")
+    is_active = models.BooleanField(default=False, verbose_name="признак")
+
+    def __str__(self):
+        return f"{self.number}, {self.name}, {self.is_active}"
+
+    class Meta:
+        verbose_name = "версия"
+        verbose_name_plural = "версии"
+        unique_together = ("product", "number")

@@ -1,10 +1,20 @@
 from django import forms
 
-from catalog.models import Product
+from catalog.models import Product, Version
 from config import settings
 
 
-class ProductForm(forms.ModelForm):
+class StyleFormMixin:
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            if isinstance(field.widget, forms.CheckboxInput):
+                field.widget.attrs['class'] = 'form-check-input'
+            else:
+                field.widget.attrs['class'] = 'form-control'
+
+
+class ProductForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Product
         exclude = ('created_at', 'updated_at')
@@ -26,3 +36,18 @@ class ProductForm(forms.ModelForm):
             if word.lower() in description.lower():
                 raise forms.ValidationError(f'Описание не должно содержать слово "{word}"')
         return description
+
+
+class VersionForm(StyleFormMixin, forms.ModelForm):
+    class Meta:
+        model = Version
+        fields = ('number', 'name', 'is_active')
+
+    def clean_is_active(self):
+        is_active = self.cleaned_data.get('is_active')
+
+        if is_active:
+            active_versions = Version.objects.filter(is_active=True).exclude(pk=self.instance.pk)
+            if active_versions.exists():
+                raise forms.ValidationError(f'Может быть активна только одна версия продукта"')
+        return is_active
