@@ -2,47 +2,54 @@
 {% load catalog_image_tags %}
 
 {% block content %}
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card mb-3">
-                    <div class="card-header">
-                        {% if object %}
-                            Изменить продукт
-                        {% else %}
-                            Добавить продукт
-                        {% endif %}
-                    </div>
-                    <div class="card-body">
-                        {{ form.as_p }}
-                    </div>
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-success">
-                            {% if object %}
-                                Сохранить
-                            {% else %}
-                                Создать
-                            {% endif %}
-                        </button>
-                    </div>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <div class="card-header">
+                    {% if object %}
+                        Изменить продукт
+                    {% else %}
+                        Добавить продукт
+                    {% endif %}
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card mb-3">
-                    <div class="card-header">Версии продукта</div>
-                    <div class="card-body">
-                        {{ formset.management_form }}
-                        {% for form in formset.forms %}
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    {{ form.as_p }}
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </div>
+                <div class="card-body">
+                    {{ form.as_p }}
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-success">
+                        {% if object %}
+                            Сохранить
+                        {% else %}
+                            Создать
+                        {% endif %}
+                    </button>
                 </div>
             </div>
         </div>
-    </form>
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <div class="card-header">Версии продукта</div>
+                <div class="card-body">
+                    {{ formset.management_form }}
+                    {% if formset.non_form_errors %}
+                    <div class="alert alert-danger">
+                        {% for error in formset.non_form_errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    {% for form in formset.forms %}
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                {{ form.as_p }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 {% endblock %}

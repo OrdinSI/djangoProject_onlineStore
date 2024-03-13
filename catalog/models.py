@@ -30,7 +30,7 @@ class Product(models.Model):
     updated_at = models.DateTimeField(auto_now=True, verbose_name="дата изменения")
 
     def __str__(self):
-        return (f"{self.name}, {self.description}, {self.price}, {self.category}")
+        return f"{self.name}, {self.description}, {self.price}"
 
     class Meta:
         verbose_name = "продукт"
@@ -42,7 +42,7 @@ class Version(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='versions', verbose_name="продукт")
     number = models.IntegerField(default=0, validators=[MinValueValidator(0)], verbose_name="номер")
     name = models.CharField(max_length=255, verbose_name="название")
-    is_active = models.BooleanField(default=False, verbose_name="признак")
+    is_active = models.BooleanField(default=False, verbose_name="активность")
 
     def __str__(self):
         return f"{self.number}, {self.name}, {self.is_active}"

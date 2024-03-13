@@ -1,4 +1,5 @@
 from django import forms
+from django.forms import BaseInlineFormSet
 
 from catalog.models import Product, Version
 from config import settings
@@ -43,11 +44,20 @@ class VersionForm(StyleFormMixin, forms.ModelForm):
         model = Version
         fields = ('number', 'name', 'is_active')
 
-    def clean_is_active(self):
-        is_active = self.cleaned_data.get('is_active')
 
-        if is_active:
-            active_versions = Version.objects.filter(is_active=True).exclude(pk=self.instance.pk)
-            if active_versions.exists():
-                raise forms.ValidationError(f'Может быть активна только одна версия продукта"')
-        return is_active
+class VersionFormSet(BaseInlineFormSet):
+    def clean(self):
+        super().clean()
+
+        active_versions = [form.cleaned_data for form in self.forms if form.cleaned_data.get('is_active')
+                           and not form.cleaned_data.get('DELETE', False)]
+
+        if len(active_versions) > 1:
+            raise forms.ValidationError('Может быть активна только одна версия продукта.')
+
+        if self.has_changed():
+            if len(active_versions) == 1:
+                active_versions = active_versions[0]
+                Version.objects.filter(product_id=self.instance.id, is_active=True).update(is_active=False)
+
+        return active_versions
