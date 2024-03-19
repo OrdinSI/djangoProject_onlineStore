@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "catalog.apps.CatalogConfig",
     "blog.apps.BlogConfig",
+    "users.apps.UsersConfig",
 
 ]
 
@@ -140,3 +141,5 @@ FORBIDDEN_WORDS = [
     'казино', 'криптовалюта', 'крипта', 'биржа', 'дешево',
     'бесплатно', 'обман', 'полиция', 'радар'
 ]
+
+AUTH_USER_MODEL = "users.User"
