@@ -8,6 +8,38 @@
             <a class="p-2 text-dark" href="{% url 'blog:blog_list' %}">Блог</a>
         </nav>
     </div>
-    <a class="btn btn-outline-primary" href="#">Войти</a>
 
+    <div class="btn-group">
+        {% if user.is_authenticated %}
+            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                Управление
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{% url 'users:profile' %}" aria-current="true">Профиль</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li>
+                    <form method="post" action="{% url 'users:logout' %}">
+                        {% csrf_token %}
+                        <button class="dropdown-item" aria-current="true" type="submit">Выйти</button>
+                    </form>
+                </li>
+            </ul>
+
+        {% else %}
+            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                Войти
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{% url 'users:login' %}" aria-current="true">Войти</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="{% url 'users:register' %}" aria-current="true">Зарегистрироваться</a></li>
+            </ul>
+        {% endif %}
+    </div>
 </div>

@@ -10,6 +10,11 @@ from blog.models import Blog
 class BlogListView(ListView):
     model = Blog
 
+    def get_context_data(self, *args, **kwargs):
+        context_data = super().get_context_data(*args, **kwargs)
+        context_data['title'] = "Блог"
+        return context_data
+
     def get_queryset(self, *args, **kwargs):
         queryset = super().get_queryset(*args, **kwargs)
         is_draft = self.request.GET.get('is_draft')
