@@ -12,3 +12,4 @@ class User(AbstractUser):
     country = models.CharField(max_length=100, verbose_name='страна', **NULLABLE)
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
+

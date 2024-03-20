@@ -20,12 +20,7 @@
                 <li>
                     <hr class="dropdown-divider">
                 </li>
-                <li>
-                    <form method="post" action="{% url 'users:logout' %}">
-                        {% csrf_token %}
-                        <button class="dropdown-item" aria-current="true" type="submit">Выйти</button>
-                    </form>
-                </li>
+                <li><a class="dropdown-item" href="{% url 'users:logout' %}" aria-current="true">Выйти</a></li>
             </ul>
 
         {% else %}
