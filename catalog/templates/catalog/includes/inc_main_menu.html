@@ -1,8 +1,40 @@
-<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+<div class="d-flex flex-column flex-md-row align-items-center justify-content-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
     <h5 class="my-0 mr-md-auto font-weight-normal">Online Store</h5>
-    <nav class="ms-5">
-        <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:product_list' %}">Каталог</a>
-        <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:contacts' %}">Контакты</a>
-        <a class="p-2 btn btn-outline-primary" href="{% url 'blog:blog_list' %}">Блог</a>
-    </nav>
+
+    <div class="d-flex align-items-center mx-auto">
+        <nav class="my-2 my-md-0 mr-auto">
+            <a class="p-2 text-dark" href="{% url 'catalog:product_list' %}">Каталог</a>
+            <a class="p-2 text-dark" href="{% url 'catalog:contacts' %}">Контакты</a>
+            <a class="p-2 text-dark" href="{% url 'blog:blog_list' %}">Блог</a>
+        </nav>
+    </div>
+
+    <div class="btn-group">
+        {% if user.is_authenticated %}
+            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                Управление
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{% url 'users:profile' %}" aria-current="true">Профиль</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="{% url 'users:logout' %}" aria-current="true">Выйти</a></li>
+            </ul>
+
+        {% else %}
+            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                Войти
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{% url 'users:login' %}" aria-current="true">Войти</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="{% url 'users:register' %}" aria-current="true">Зарегистрироваться</a></li>
+            </ul>
+        {% endif %}
+    </div>
 </div>

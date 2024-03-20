@@ -1,9 +1,10 @@
 from django import forms
 
 from blog.models import Blog
+from catalog.forms import StyleFormMixin
 
 
-class BlogForm(forms.ModelForm):
+class BlogForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Blog
         fields = ['title', 'content', 'preview_image']
