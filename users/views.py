@@ -1,20 +1,21 @@
+import random
+import string
 from datetime import timedelta, datetime
 
 from django.conf import settings
 from django.contrib.auth import login
-from django.contrib.auth.views import LoginView,  PasswordResetView, PasswordResetConfirmView
-from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth.views import LoginView
 from django.core.mail import send_mail
 from django.shortcuts import redirect
 from django.urls import reverse_lazy, reverse
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.views import View
-from django.views.generic import CreateView, UpdateView, TemplateView
+from django.views.generic import CreateView, UpdateView, TemplateView, FormView
 from jose import jwt, JWTError
 
-from users.forms import UserRegisterForm, UserProfileForm, UserAuthenticationForm, UserPasswordResetForm, \
-    UserSetNewPasswordForm
+from users.forms import UserRegisterForm, UserProfileForm, UserAuthenticationForm, UserPasswordResetForm
 from users.models import User
 
 
@@ -100,20 +101,46 @@ class UserLoginView(LoginView):
     template_name = 'users/login.html'
 
 
-class UserPasswordResetView(SuccessMessageMixin, PasswordResetView):
-    model = User
-    form_class = UserPasswordResetForm
+# class UserPasswordResetView(SuccessMessageMixin, PasswordResetView):
+#     model = User
+#     form_class = UserPasswordResetForm
+#     template_name = 'users/user_password_reset.html'
+#     success_url = reverse_lazy('catalog:product_list')
+#     success_message = 'Письмо с инструкцией по восстановлению пароля отправлена на ваш email'
+#     subject_template_name = 'users/email/password_subject_reset_mail.txt'
+#     email_template_name = 'users/email/password_reset_email.html'
+#
+#
+# class UserPasswordResetConfirmView(SuccessMessageMixin, PasswordResetConfirmView):
+#     model = User
+#     form_class = UserSetNewPasswordForm
+#     template_name = 'users/user_password_set_new.html'
+#     success_url = reverse_lazy('users:login')
+#     success_message = 'Пароль успешно изменен. Можете авторизоваться на сайте.'
+
+
+class UserPasswordResetView(FormView):
     template_name = 'users/user_password_reset.html'
-    success_url = reverse_lazy('catalog:product_list')
-    success_message = 'Письмо с инструкцией по восстановлению пароля отправлена на ваш email'
-    subject_template_name = 'users/email/password_subject_reset_mail.txt'
-    email_template_name = 'users/email/password_reset_email.html'
+    form_class = UserPasswordResetForm
+    success_url = reverse_lazy('users:user_password_sent')
+
+    def form_valid(self, form):
+        email = form.cleaned_data.get('email')
+        user = User.objects.filter(email=email).first()
+
+        if user is not None:
+            characters = string.ascii_letters + string.digits
+            new_password = ''.join(random.choice(characters) for i in range(12))
+
+            user.password = make_password(new_password)
+            user.save()
+
+            subject = 'Восстановление пароля'
+            message = f'Ваш новый пароль: {new_password}'
+            send_mail(subject, message, settings.EMAIL_HOST_USER, [user.email])
+
+        return super().form_valid(form)
 
 
-class UserPasswordResetConfirmView(SuccessMessageMixin, PasswordResetConfirmView):
-    model = User
-    form_class = UserSetNewPasswordForm
-    template_name = 'users/user_password_set_new.html'
-    success_url = reverse_lazy('catalog:product_list')
-    success_message = 'Пароль успешно изменен. Можете авторизоваться на сайте.'
-
+class UserPasswordSentView(TemplateView):
+    template_name = 'users/user_password_sent.html'

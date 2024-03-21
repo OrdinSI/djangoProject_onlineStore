@@ -3,6 +3,13 @@
 
 
 {% block content %}
+{#    {% if messages %}#}
+{#        {% for message in messages %}#}
+{#            <div class="alert alert-success" role="alert">#}
+{#            {{ message }}#}
+{#            </div>#}
+{#        {% endfor %}#}
+{#    {% endif %}#}
     <div class="container">
         {% if request.user.is_authenticated %}
             <div class="mb-3">
