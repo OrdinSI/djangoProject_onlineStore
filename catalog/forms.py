@@ -20,6 +20,10 @@ class ProductForm(StyleFormMixin, forms.ModelForm):
         model = Product
         exclude = ('created_at', 'updated_at')
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['owner'].widget = forms.HiddenInput()
+
     def clean_name(self):
         name = self.cleaned_data.get('name')
         forbidden_words = settings.FORBIDDEN_WORDS
