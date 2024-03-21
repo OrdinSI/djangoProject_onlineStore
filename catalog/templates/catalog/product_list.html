@@ -4,23 +4,26 @@
 
 {% block content %}
     <div class="container">
-    <div class="mb-3">
-        <a class="btn btn-primary" href="{% url "catalog:product_create" %}" role="button">Добавить продукт</a>
-    </div>
+        {% if request.user.is_authenticated %}
+            <div class="mb-3">
+                <a class="btn btn-primary" href="{% url "catalog:product_create" %}" role="button">Добавить продукт</a>
+            </div>
+        {% endif %}
         <div class="row row-cols-1 row-cols-md-4 g-4 justify-content-center">
             {% for object in object_list %}
                 {% if object.active_version %}
-                <div class="col">
-                    <div class="card h-100">
-                        <img src="{% catalog_image_tags object.image_preview %}" class="card-img-top img-fluid" alt="{{ object.name }}">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ object.name }}</h5>
-                            <p class="card-text" >{{ object.price }} &#8381;</p>
-                            <p class="card-text">{{ object.description | truncatechars:100 }}</p>
-                            <a href="{% url 'catalog:product_detail' object.pk %}" class="stretched-link"></a>
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="{% catalog_image_tags object.image_preview %}" class="card-img-top img-fluid"
+                                 alt="{{ object.name }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ object.name }}</h5>
+                                <p class="card-text">{{ object.price }} &#8381;</p>
+                                <p class="card-text">{{ object.description | truncatechars:100 }}</p>
+                                <a href="{% url 'catalog:product_detail' object.pk %}" class="stretched-link"></a>
+                            </div>
                         </div>
                     </div>
-                </div>
                 {% endif %}
             {% endfor %}
         </div>
