@@ -3,10 +3,12 @@
 
 {% block content %}
 <div class="container-fluid">
-    {% if request.user == object.owner %}
+    {% if request.user == object.owner or show_detail_button or request.user.is_superuser %}
     <div class="mb-3">
         <a class="btn btn-primary" href="{% url "catalog:product_update" object.pk %}" role="button">Обновить продукт</a>
+        {% if request.user == object.owner or request.user.is_superuser %}
         <a class="btn btn-primary" href="{% url "catalog:product_delete" object.pk %}" role="button">Удалить продукт</a>
+            {% endif %}
     </div>
     {% endif %}
     <div class="card mb-3">

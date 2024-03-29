@@ -8,6 +8,7 @@ from blog.models import Blog
 
 
 class BlogListView(ListView):
+    """Blog list view."""
     model = Blog
 
     def get_context_data(self, *args, **kwargs):
@@ -26,6 +27,7 @@ class BlogListView(ListView):
 
 
 class BlogDetailView(DetailView):
+    """Blog detail view."""
     model = Blog
 
     def get_object(self, queryset=None):
@@ -36,6 +38,7 @@ class BlogDetailView(DetailView):
 
 
 class BlogCreateView(CreateView):
+    """Blog create view."""
     model = Blog
     form_class = BlogForm
     success_url = reverse_lazy('blog:blog_list')
@@ -50,6 +53,7 @@ class BlogCreateView(CreateView):
 
 
 class BlogUpdateView(UpdateView):
+    """Blog update view."""
     model = Blog
     form_class = BlogForm
 
@@ -66,6 +70,7 @@ class BlogUpdateView(UpdateView):
 
 
 class BlogDeleteView(DeleteView):
+    """Blog delete view."""
     model = Blog
     success_url = reverse_lazy('blog:blog_list')
 
