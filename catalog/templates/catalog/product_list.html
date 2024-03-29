@@ -11,7 +11,7 @@
 {#        {% endfor %}#}
 {#    {% endif %}#}
     <div class="container">
-        {% if request.user.is_authenticated %}
+        {% if request.user.is_authenticated and show_create_button %}
             <div class="mb-3">
                 <a class="btn btn-primary" href="{% url "catalog:product_create" %}" role="button">Добавить продукт</a>
             </div>

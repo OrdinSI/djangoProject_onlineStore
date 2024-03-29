@@ -12,8 +12,7 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy, reverse
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.views import View
-from django.views.generic import CreateView, UpdateView, TemplateView, FormView
+from django.views.generic import CreateView, UpdateView, TemplateView, FormView, View
 from jose import jwt, JWTError
 
 from users.forms import UserRegisterForm, UserProfileForm, UserAuthenticationForm, UserPasswordResetForm
@@ -21,6 +20,7 @@ from users.models import User
 
 
 class RegisterView(CreateView):
+    """Register view"""
     model = User
     form_class = UserRegisterForm
     template_name = 'users/register.html'
@@ -33,7 +33,7 @@ class RegisterView(CreateView):
 
     def form_valid(self, form):
         user = form.save(commit=False)
-        user.is_active = True
+        user.is_active = False
         user.save()
 
         uid = urlsafe_base64_encode(force_bytes(user.pk))
@@ -57,6 +57,8 @@ class RegisterView(CreateView):
 
 
 class UserConfirmEmailView(View):
+    """User confirm email view."""
+
     def get(self, request, token):
         try:
             payload = jwt.decode(token, settings.SECRET_KEY, algorithms=['HS256'])
@@ -75,18 +77,22 @@ class UserConfirmEmailView(View):
 
 
 class EmailConfirmedView(TemplateView):
+    """Email confirmed view."""
     template_name = 'users/email_confirmed.html'
 
 
 class EmailFailedView(TemplateView):
+    """Email not confirmed"""
     template_name = 'users/email_failed.html'
 
 
 class EmailConfirmationSentView(TemplateView):
+    """Email confirmation"""
     template_name = 'users/email_confirmation_sent.html'
 
 
 class ProfileView(LoginRequiredMixin, UpdateView):
+    """Profile view."""
     model = User
     form_class = UserProfileForm
     template_name = 'users/user_form.html'
@@ -97,6 +103,7 @@ class ProfileView(LoginRequiredMixin, UpdateView):
 
 
 class UserLoginView(LoginView):
+    """User login view."""
     model = User
     form_class = UserAuthenticationForm
     template_name = 'users/login.html'
@@ -121,6 +128,7 @@ class UserLoginView(LoginView):
 
 
 class UserPasswordResetView(FormView):
+    """User password reset view."""
     template_name = 'users/user_password_reset.html'
     form_class = UserPasswordResetForm
     success_url = reverse_lazy('users:user_password_sent')
@@ -144,4 +152,5 @@ class UserPasswordResetView(FormView):
 
 
 class UserPasswordSentView(TemplateView):
+    """User password sent view."""
     template_name = 'users/user_password_sent.html'

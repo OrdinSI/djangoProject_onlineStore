@@ -6,12 +6,14 @@ from users.models import User
 
 
 class UserRegisterForm(StyleFormMixin, UserCreationForm):
+    """User registration form."""
     class Meta:
         model = User
         fields = ('email', 'password1', 'password2')
 
 
 class UserProfileForm(StyleFormMixin, UserChangeForm):
+    """User profile"""
     class Meta:
         model = User
         fields = ('email', 'first_name', 'last_name', 'phone', 'country', 'avatar')
@@ -22,10 +24,12 @@ class UserProfileForm(StyleFormMixin, UserChangeForm):
 
 
 class UserAuthenticationForm(StyleFormMixin, AuthenticationForm):
+    """User authentication"""
     pass
 
 
 class UserPasswordResetForm(StyleFormMixin, PasswordResetForm):
+    """User password reset form"""
     class Meta:
         model = User
         fields = ('email',)
