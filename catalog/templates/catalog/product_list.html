@@ -3,17 +3,18 @@
 
 
 {% block content %}
-{#    {% if messages %}#}
-{#        {% for message in messages %}#}
-{#            <div class="alert alert-success" role="alert">#}
-{#            {{ message }}#}
-{#            </div>#}
-{#        {% endfor %}#}
-{#    {% endif %}#}
+    {#    {% if messages %}#}
+    {#        {% for message in messages %}#}
+    {#            <div class="alert alert-success" role="alert">#}
+    {#            {{ message }}#}
+    {#            </div>#}
+    {#        {% endfor %}#}
+    {#    {% endif %}#}
     <div class="container">
         {% if request.user.is_authenticated and show_create_button %}
             <div class="mb-3">
                 <a class="btn btn-primary" href="{% url "catalog:product_create" %}" role="button">Добавить продукт</a>
+                <a class="btn btn-primary" href="{% url "catalog:category_list" %}" role="button">Категории</a>
             </div>
         {% endif %}
         <div class="row row-cols-1 row-cols-md-4 g-4 justify-content-center">

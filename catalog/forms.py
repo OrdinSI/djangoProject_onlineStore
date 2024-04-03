@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import BaseInlineFormSet
 
-from catalog.models import Product, Version
+from catalog.models import Product, Version, Category
 from config import settings
 
 
@@ -86,3 +86,5 @@ class ModeratorProductForm(StyleFormMixin, forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
         super().__init__(*args, **kwargs)
+
+
