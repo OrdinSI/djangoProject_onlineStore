@@ -1,10 +1,11 @@
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.forms import inlineformset_factory
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView, DeleteView
 
 from catalog.forms import ProductForm, VersionForm, VersionFormSet, ModeratorProductForm
-from catalog.models import Product, Version
+from catalog.models import Product, Version, Category
+from config.utils.selection import get_model
 
 
 class ProductListView(ListView):
@@ -148,3 +149,14 @@ class ContactsView(TemplateView):
         message = request.POST.get('message')
         print(f"Name: {name}, Phone: {phone}, Message: {message}")
         return super().get(request, *args, **kwargs)
+
+
+class CategoryListView(LoginRequiredMixin, ListView):
+    """Category list view."""
+    model = Category
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        categories = get_model(Category, 'categories')
+        context['categories'] = categories
+        return context

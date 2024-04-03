@@ -1,0 +1,23 @@
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <div class="card-header">
+                    Категории
+                </div>
+                <div class="card-body">
+                    <ul>
+                        {% for category in categories %}
+                            <li>{{ category.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="card-footer text-center">
+                    <a href="{% url 'catalog:product_list' %}" class="btn btn-warning">Назад</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

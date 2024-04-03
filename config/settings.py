@@ -23,10 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-wy(wer%ks27rm+6tc_pf61ei$+-9s#cx#3&+_88l7*a0hoy7=2"
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG') == "True"
 
 ALLOWED_HOSTS = []
 
@@ -160,3 +160,14 @@ EMAIL_ADMIN = EMAIL_HOST_USER
 
 
 BASE_URL = 'http://localhost:8000'
+
+
+CACHE_ENABLED = os.getenv("CACHE_ENABLED") == "True"
+
+if CACHE_ENABLED:
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.redis.RedisCache",
+            "LOCATION": os.getenv('REDIS_URL'),
+        }
+    }
