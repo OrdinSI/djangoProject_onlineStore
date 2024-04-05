@@ -5,7 +5,7 @@ from django.views.generic import ListView, DetailView, TemplateView, CreateView,
 
 from catalog.forms import ProductForm, VersionForm, VersionFormSet, ModeratorProductForm
 from catalog.models import Product, Version, Category
-from config.utils.selection import get_model
+from catalog.services import get_model
 
 
 class ProductListView(ListView):
